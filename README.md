@@ -70,7 +70,7 @@ mamp-wp-delete.csh  demo
 
 If the WP-CLI command isn't installed, the tool tries to download the latest version and install it to /usr/local/bin/wp .
 
-1. MAMPの demo データベースが、 「/Applications/MAMP/htdocs/demo.sql」にエクスポート（バックアップ）します（あとで消して下さい）。
+1. MAMPの demo データベースを、 「/Applications/MAMP/htdocs/demo.sql」にエクスポート（バックアップ）します（あとで消して下さい）。
 2. MAMP の demo データベースを削除します。
 3. /Applications/MAMP/htdocs/demo/ フォルダを削除します。
 
