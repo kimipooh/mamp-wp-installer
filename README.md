@@ -58,7 +58,7 @@ mamp-wp-install.csh  demo ja
 
 もし、/Applications/MAMP/htdocs/demo/ フォルダ がすでにあった場合には、警告メッセージとともに、処理が終了します。
 
-もし、/usr/local/bin/wp に WP-CLI がインストールしていない場合には、自動的に最新の WP-CLI をダウンロードし、インストールします。
+もし、/usr/local/bin/wp に WP-CLI をインストールしていない場合には、自動的に最新の WP-CLI をダウンロードし、インストールします。
 
 ## Delete a WordPress （WordPress の削除）
 
@@ -74,4 +74,4 @@ If the WP-CLI command isn't installed, the tool tries to download the latest ver
 2. MAMP の demo データベースを削除します。
 3. /Applications/MAMP/htdocs/demo/ フォルダを削除します。
 
-もし、/usr/local/bin/wp に WP-CLI がインストールしていない場合には、自動的に最新の WP-CLI をダウンロードし、インストールします。
+もし、/usr/local/bin/wp に WP-CLI をインストールしていない場合には、自動的に最新の WP-CLI をダウンロードし、インストールします。
