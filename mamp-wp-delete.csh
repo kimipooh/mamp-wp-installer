@@ -42,6 +42,9 @@ while(1)
   set check = $<
   if("$check" == "yes") then
      break
+  else
+     echo "Exit process."
+     exit
   endif
 end
 
