@@ -3,6 +3,9 @@
 set wp_dbname = "$1"
 set wp_dbuser = "root"
 set wp_dbpass = "root"
+set wp_login_user="admin"
+set wp_login_pass="admin"
+set wp_login_email="sample@example.com"
 set lang = "$2"
 
 set WP = '/usr/local/bin/wp'
@@ -82,7 +85,7 @@ $WP core config --dbname=$wp_dbname --dbuser=$wp_dbuser --dbpass=$wp_dbpass --db
 $WP db create
 
 # Install WordPress 
-$WP core install --url=$wp_url --title=sample --admin_user=admin --admin_password="admin" --admin_email=sample@example.con 
+$WP core install --url=$wp_url --title=sample --admin_user="$wp_login_user" --admin_password="$wp_login_pass" --admin_email="$wp_login_email" 
 
 $WP plugin update --all
 #$WP plugin activate wp-multibyte-patch
