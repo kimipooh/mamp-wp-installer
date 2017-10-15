@@ -39,7 +39,7 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 rehash
 endif
 
-wp cli update --yes
+$WP cli update --yes
 
 # Check requirement commands
 echo 'Please check the settings.'

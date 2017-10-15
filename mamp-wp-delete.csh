@@ -29,7 +29,7 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 rehash
 endif
 
-wp cli update --yes
+$WP cli update --yes
 
 # Check requirement commands
 echo 'Remove the following site'
@@ -53,7 +53,7 @@ echo 'Export  WordPress DB to ~/MAMP/htdocs/$wp_dbname.sql'
 echo ''
 
 cd  $wp_path
-wp db export ${wp_dbname}.sql
+$WP db export ${wp_dbname}.sql
 mv ${wp_dbname}.sql ../
 
 
@@ -61,7 +61,7 @@ echo ''
 echo 'Deleting WordPress'
 echo ''
 
-wp db drop --yes
+$WP db drop --yes
 rm -rf $wp_path
 
 
