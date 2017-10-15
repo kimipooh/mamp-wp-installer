@@ -82,7 +82,7 @@ $WP core config --dbname=$wp_dbname --dbuser=$wp_dbuser --dbpass=$wp_dbpass --db
 $WP db create
 
 # Install WordPress 
-$WP core install --url=$wp_url --title=sample --admin_user=admin --admin_password="admin" --admin_email=kitani@cseas.kyoto-u.ac.jp 
+$WP core install --url=$wp_url --title=sample --admin_user=admin --admin_password="admin" --admin_email=sample@example.con 
 
 $WP plugin update --all
 #$WP plugin activate wp-multibyte-patch
