@@ -3,14 +3,13 @@
 set wp_dbname = "$1"
 set wp_dbuser = "root"
 set wp_dbpass = "root"
+set wp_db_host = "localhost:8889"
 set wp_login_user="admin"
 set wp_login_pass="admin"
 set wp_login_email="sample@example.com"
 set lang = "$2"
-
 set WP = '/usr/local/bin/wp'
-
-set path = (/Applications/MAMP/bin/php/php5.6.30/bin $path)
+set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
 
 if ( "$lang" == "" ) then
   set lang = "ja"
@@ -48,9 +47,15 @@ $WP cli update --yes
 echo 'Please check the settings.'
 echo 'Current path is '
 which php
-which mysql
-echo $wp_path
-echo "DB: $wp_dbname"
+echo "WordPress Path: $wp_path"
+echo "WordPress User: $wp_login_user"
+echo "WordPress Pass: $wp_login_pass"
+echo "WordPress User E-mail: $wp_login_email"
+echo ""
+echo "DB Name: $wp_dbname"
+echo "DB User: $wp_dbuser"
+echo "DB Pass: $wp_dbpass"
+echo "Site URL: $wp_url"
 echo $wp_url
 echo ''
 echo -n 'Are you ready? [yes/no]: '
@@ -79,7 +84,7 @@ endif
 
 # Setting up wp-config.php
 #cp wp-config-sample.php wp-config.php
-$WP core config --dbname=$wp_dbname --dbuser=$wp_dbuser --dbpass=$wp_dbpass --dbhost=localhost:8889
+$WP core config --dbname="$wp_dbname" --dbuser="$wp_dbuser" --dbpass="$wp_dbpass" --dbhost="$wp_db_host"
 
 # Create DB
 $WP db create
@@ -98,4 +103,6 @@ $WP plugin update --all
 
 # Update language files
 $WP core language update
+
+open $wp_url
 

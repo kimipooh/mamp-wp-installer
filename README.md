@@ -1,7 +1,7 @@
 # mamp-wp-installer
-This is the helpful shell script tools for installing or removing WordPress on MAMP by a command line for MacOS. If you want to use them, please install MAMP (https://www.mamp.info/en/),  first. I tested the tool on MacOS 10.12.6.
+This is the helpful shell script tools for installing or removing WordPress on MAMP by a command line for MacOS. If you want to use them, please install MAMP (https://www.mamp.info/en/),  first. I tested the tool on MacOS 10.12.6 and 10.13.
 
-これは MacOS用のMAMPにおいて、コマンドから WordPress の初期インストールや削除を手助けするツールです。そのため、MAMPがインストールされていなければ動作しません。また MacOS 10.12.6で動作検証しています。
+これは MacOS用のMAMPにおいて、コマンドから WordPress の初期インストールや削除を手助けするツールです。そのため、MAMPがインストールされていなければ動作しません。また MacOS 10.12.6/10.13で動作検証しています。
 
 # How to install （インストール方法）
 
@@ -14,10 +14,10 @@ Move to mamp-wp-install.csh and mamp-wp-delete.csh to a path directory, such as 
 
 # How to set an initial settings.（初期設定）
 
-Please check your MAMP php folder (/Applications/MAMP/bin/php/php[version]/bin). The default setting is for php5.6.30 on MAMP 4.0
+Please check your MAMP php folder (/Applications/MAMP/bin/php/php[version]/bin). The default setting is for php5.6.31 on MAMP 4.0.1
 
 Please change "set path" to your php path in mamp-wp-install.csh and mamp-wp-delete.csh.
-set path = (/Applications/MAMP/bin/php/php5.6.30/bin $path)
+set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
 
 If you change a host, such as localhost instead of localhost:8888 (default), please change "set wp_url" value in mamp-wp-install.csh and mamp-wp-delete.csh .
 
@@ -25,10 +25,10 @@ If you change a host, such as localhost instead of localhost:8888 (default), ple
 以下 /Applications は 「アプリケーション」フォルダを意味します。
 /Applications/MAMP/bin/php/php[version]/bin
 
-デフォルトは、 MAMA 4.0 に搭載されている php5.6.30 にセットしています。
+デフォルトは、 MAMA 4.0.1 に搭載されている php5.6.31 にセットしています。
 
 もしこれが異なる場合には、「mamp-wp-install.csh」「mamp-wp-delete.csh」ファイルを開いて、
-set path = (/Applications/MAMP/bin/php/php5.6.30/bin $path)
+set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
 の箇所の php5.6.30 をお使いのバージョンに変更してください。
 
 また、MAMPのデフォルト URLは、 http://localhost:8888 ですが、 http://localhost などURLを変更したい場合には、「mamp-wp-install.csh」「mamp-wp-delete.csh」ファイルを開いて、
@@ -75,3 +75,11 @@ If the WP-CLI command isn't installed, the tool tries to download the latest ver
 3. /Applications/MAMP/htdocs/demo/ フォルダを削除します。
 
 もし、/usr/local/bin/wp に WP-CLI をインストールしていない場合には、自動的に最新の WP-CLI をダウンロードし、インストールします。
+
+# バージョン履歴
+
+* 1.0 リリース
+* 1.1 READMEの修正
+* 1.2 いくつかの設定値を変数に変更
+* 1.3 いくつかの設定値を変数に変更
+* 1.4 MAMP 4.0.1 に対応。MacOS 10.13 (High Sierra) で動作確認。環境設定項目を追加。

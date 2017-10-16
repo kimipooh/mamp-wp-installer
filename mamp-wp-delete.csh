@@ -6,7 +6,7 @@ set wp_dbpass = "root"
 
 set WP = '/usr/local/bin/wp'
 
-set path = (/Applications/MAMP/bin/php/php5.6.30/bin $path)
+set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
 
 if ( "$wp_dbname" == "" ) then
  echo "Please input database name."
