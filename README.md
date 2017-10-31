@@ -14,7 +14,7 @@ Move to mamp-wp-install.csh and mamp-wp-delete.csh to a path directory, such as 
 
 # How to set an initial settings.（初期設定）
 
-Please check your MAMP php folder (/Applications/MAMP/bin/php/php[version]/bin). The default setting is for php5.6.31 on MAMP 4.0.1
+Please check your MAMP php folder (/Applications/MAMP/bin/php/php[version]/bin). The default setting is for php5.6.31 on MAMP 4.2.1
 
 Please change "set path" to your php path in mamp-wp-install.csh and mamp-wp-delete.csh.
 set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
@@ -25,7 +25,7 @@ If you change a host, such as localhost instead of localhost:8888 (default), ple
 以下 /Applications は 「アプリケーション」フォルダを意味します。
 /Applications/MAMP/bin/php/php[version]/bin
 
-デフォルトは、 MAMA 4.0.1 に搭載されている php5.6.31 にセットしています。
+デフォルトは、 MAMA 4.2.1 に搭載されている php5.6.31 にセットしています。
 
 もしこれが異なる場合には、「mamp-wp-install.csh」「mamp-wp-delete.csh」ファイルを開いて、
 set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
@@ -76,10 +76,47 @@ If the WP-CLI command isn't installed, the tool tries to download the latest ver
 
 もし、/usr/local/bin/wp に WP-CLI をインストールしていない場合には、自動的に最新の WP-CLI をダウンロードし、インストールします。
 
+# Addtional functions （追加機能）
+
+## Enable SSL (https) on MAMP for macOS only (macOS 専用 - MAMP で SSLを有効にする）
+
+Firstly, you need to change Apache port 8888 to 80 before you enable SSL on MAMP.
+If you have already installed a WordPerss in MAMP, you need to migrate the WordPress URL (http://localhost:8888/*** to http://localhost/*** ). I don't explain it. 
+
+最初に MAMPで SSLを利用したい場合には、MAMP設定で Apache port を 80 に変更する必要があります。もしすでに WordPress を MAMP上でインストールしていた場合には、URLが変更になりますので、引っ越しが必要です。その方法はここでは説明しません。
+
+On Terminal app.
+
+./mamp-enable-ssl.csh 
+
+The Passphrase will be required at several times by this tool for creating the CA and SSL certification files.
+Please input an unique password. And input Enter about a cetification information, such as "State or Province Name", "Locality Name", and so on, without any information. 
+
+The tool will automatically create and enable /Applications/MAMP/conf/apache/httpd-ssl.conf file for the SSL settings. SSL certification files are in  /Applications/MAMP/conf/apache/ssl folder.
+
+Then, open /Applications/MAMP/conf/apache/conf/ssl/ssl.crt file and add (install) to "Keychain Access". And open "Keychain Access" app in Application > Untilities folder. Search as "localhost" and open the added "localhost" certification file. And then, set "Always trusted" in the trusted section.
+
+Run MAMP and open https://localhost . If "No protected" is displayed by a web browser, clear cookie and cache or open the guest mode (Chrome) or Private mode.
+
+If you disable SSL on MAMP, please comment out httpd-ssl.conf (# Include /Applications/MAMP/conf/apache/httpd-ssl.conf) in /Applications/MAMP/conf/apache/httpd.conf.
+
+日本語の利用方法については
+https://kitaney-wordpress.blogspot.com/2017/10/mamp-ssl-macos-high-sierra.html
+で詳しく説明しているので、そちらを御覧ください。
+
+## How to install a WordPress with SSL (https) on MAMP (MAMP で SSL対応の WordPress をインストールする方法）
+
+Basically, you can use "mamp-wp-install.csh" by changing "set wp_url" value (to https://localhost/$wp_dataname).
+I prepare mamp-wp-install-with-ssl.csh command.
+
+mamp-wp-install-with-ssl.csh  demo 
+
+
 # バージョン履歴
 
 * 1.0 リリース
 * 1.1 READMEの修正
 * 1.2 いくつかの設定値を変数に変更
 * 1.3 いくつかの設定値を変数に変更
-* 1.4 MAMP 4.0.1 に対応。MacOS 10.13 (High Sierra) で動作確認。環境設定項目を追加。
+* 1.4 MAMP 4.2.1 に対応。MacOS 10.13 (High Sierra) で動作確認。環境設定項目を追加。
+* 1.5 MAMPで SSLを利用できるようにするツールを追加。
