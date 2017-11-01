@@ -14,25 +14,11 @@ Move to mamp-wp-install.csh and mamp-wp-delete.csh to a path directory, such as 
 
 # How to set an initial settings.（初期設定）
 
-Please check your MAMP php folder (/Applications/MAMP/bin/php/php[version]/bin). The default setting is for php5.6.31 on MAMP 4.2.1
+In case of mamp-wp-install-with-ssl.csh, mamp-wp-install.csh, and mamp-wp-delete.csh, please check from "START environments" to "END environments" in the tool.  At least, please check the e-mail address (Default is sample@example.com).
+If you changed a host, such as localhost instead of localhost:8888 (default), please change "set wp_url" value.
 
-Please change "set path" to your php path in mamp-wp-install.csh and mamp-wp-delete.csh.
-set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
-
-If you change a host, such as localhost instead of localhost:8888 (default), please change "set wp_url" value in mamp-wp-install.csh and mamp-wp-delete.csh .
-
-まずは、MAMPの phpフォルダをチェックしてください。
-以下 /Applications は 「アプリケーション」フォルダを意味します。
-/Applications/MAMP/bin/php/php[version]/bin
-
-デフォルトは、 MAMA 4.2.1 に搭載されている php5.6.31 にセットしています。
-
-もしこれが異なる場合には、「mamp-wp-install.csh」「mamp-wp-delete.csh」ファイルを開いて、
-set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
-の箇所の php5.6.30 をお使いのバージョンに変更してください。
-
-また、MAMPのデフォルト URLは、 http://localhost:8888 ですが、 http://localhost などURLを変更したい場合には、「mamp-wp-install.csh」「mamp-wp-delete.csh」ファイルを開いて、
-「set wp_url」のURLを変更してください。
+「mamp-wp-install-with-ssl.csh」「mamp-wp-install.csh」「mamp-wp-delete.csh」の 「START environments」から 「END environments」の初期値をチェックしてください。少なくても「メールアドレス」はチェックしてください（デフォルトは、sample@example.com）。
+MAMPのデフォルト URLは、 http://localhost:8888 ですが、 http://localhost などURLを変更した場合には、URLの初期値を変更しておいてください。
 
 # How to use （利用方法）
 
@@ -41,7 +27,7 @@ set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
 mamp-wp-install.csh  demo ja
 
 First argument is the database name on MAMP.
-Second argument is the WordPress locale. If you set "en", the latest WordPress for English locale is installed. Default is "ja".
+Second argument is the WordPress locale. If you set "en", the latest WordPress for English locale is installed. Default is "en".
 
 Install the latest WordPress (locale:ja) to /Applications/MAMP/htdocs/demo/ folder and create "demo" database to the mysql on MAMP.
 
@@ -50,14 +36,14 @@ If /Applications/MAMP/htdocs/demo/ already exist, the installation process stops
 If the WP-CLI command isn't installed, the tool tries to download the latest version and install it to /usr/local/bin/wp .
 
 第１引数は、MAMP上のデータベース名になります。
-第２引数は、インストールする WordPress のロケールです。もし「en」を設定すれば、英語版 WordPress がインストールされます。デフォルトは ja です。
+第２引数は、インストールする WordPress のロケールです。もし「ja」を設定すれば、日本語版 WordPress がインストールされます。デフォルトは en です。<br />
+WordPress の新バージョンがでた場合、英語版以外は存在しない可能性があります。
 
 mamp-wp-install.csh  demo ja
 
-の場合には、MAMPのデータベース名「demo」と /Applications/MAMP/htdocs/demo/ フォルダに WordPress がインストールされます。
+の場合には、MAMPのデータベース名「demo」と /Applications/MAMP/htdocs/demo/ フォルダに 日本語版WordPress がインストールされます。
 
 もし、/Applications/MAMP/htdocs/demo/ フォルダ がすでにあった場合には、警告メッセージとともに、処理が終了します。
-
 もし、/usr/local/bin/wp に WP-CLI をインストールしていない場合には、自動的に最新の WP-CLI をダウンロードし、インストールします。
 
 ## Delete a WordPress （WordPress の削除）
@@ -111,6 +97,15 @@ I prepare mamp-wp-install-with-ssl.csh command.
 
 mamp-wp-install-with-ssl.csh  demo 
 
+# Version History
+
+* 1.0 Release
+* 1.1 Fixed README
+* 1.2 Added some enviroment for some value.
+* 1.3 Added some enviroment for some value.
+* 1.4 MAMP 4.2.1 and macOS High Sierra (10.13) supported. Added some enviroment.
+* 1.5 Added the tool for enabling SSL on MAMP (mamp-enable-ssl.csh)
+* 1.6 Added the function for automatically setting up the php path from MAMP. Arranged the environments which a user can customize.
 
 # バージョン履歴
 
@@ -118,5 +113,6 @@ mamp-wp-install-with-ssl.csh  demo
 * 1.1 READMEの修正
 * 1.2 いくつかの設定値を変数に変更
 * 1.3 いくつかの設定値を変数に変更
-* 1.4 MAMP 4.2.1 に対応。MacOS 10.13 (High Sierra) で動作確認。環境設定項目を追加。
-* 1.5 MAMPで SSLを利用できるようにするツールを追加。
+* 1.4 MAMP 4.2.1 に対応。macOS High Sierra (10.13) で動作確認。環境設定項目を追加。
+* 1.5 MAMPで SSLを利用できるようにするツールを追加（ mamp-enable-ssl.csh）。
+* 1.6 MAMPでアクティブな php バージョンを自動検出しパスに追加する機能を追加。またユーザーが変更可能な環境設定を整理して見やすくした。

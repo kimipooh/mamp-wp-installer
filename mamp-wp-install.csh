@@ -1,26 +1,35 @@
 #!/bin/csh -f 
-# setting environments
-set wp_dbname = "$1"
+
+### START environments ###
+### PLEASE check the following arguments for your MAMP ###
 set wp_dbuser = "root"
 set wp_dbpass = "root"
 set wp_db_host = "localhost:8889"
 set wp_login_user="admin"
 set wp_login_pass="admin"
 set wp_login_email="sample@example.com"
-set lang = "$2"
 set WP = '/usr/local/bin/wp'
-set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
+set wp_base_url = "http://localhost:8888"
+### END environments ###
 
-if ( "$lang" == "" ) then
-  set lang = "ja"
-endif
+set wp_dbname = "$1"
+set lang = "$2"
+set php_path = `ls -d /Applications/MAMP/bin/php/php* | head -1`
+set path = (${php_path}/bin $path)
 
 if ( "$wp_dbname" == "" ) then
  echo "Please input database name."
  exit
 endif
 
-set wp_url = "http://localhost:8888/$wp_dbname"
+set mamp_status = "`ps -ef| grep /Applications/MAMP/Library/bin/mysqld_safe | grep -v 'grep' `"
+if ( "$mamp_status" == "" ) then
+  echo "Please run MAMP and start servers, first."
+  open -a MAMP
+  exit
+endif
+
+set wp_url = "${wp_base_url}/$wp_dbname"
 set wp_path = "/Applications/MAMP/htdocs/$wp_dbname"
 
 if ( -d "$wp_path" ) then
@@ -52,6 +61,8 @@ echo "WordPress User: $wp_login_user"
 echo "WordPress Pass: $wp_login_pass"
 echo "WordPress User E-mail: $wp_login_email"
 echo ""
+echo "Language: $lang (empty value is English)"
+echo ""
 echo "DB Name: $wp_dbname"
 echo "DB User: $wp_dbuser"
 echo "DB Pass: $wp_dbpass"
@@ -76,16 +87,15 @@ mkdir -p $wp_path
 cd  $wp_path
 
 # Download WordPress in Japanese.
-if ($lang != "en") then
-  $WP core download --force --locale=$lang
-else
+if ($lang == "" || $lang == "en") then
   $WP core download 
+else
+  $WP core download --force --locale=$lang
 endif
 
 # Setting up wp-config.php
 #cp wp-config-sample.php wp-config.php
 $WP core config --dbname="$wp_dbname" --dbuser="$wp_dbuser" --dbpass="$wp_dbpass" --dbhost="$wp_db_host"
-
 # Create DB
 $WP db create
 
@@ -105,4 +115,3 @@ $WP plugin update --all
 $WP core language update
 
 open $wp_url
-

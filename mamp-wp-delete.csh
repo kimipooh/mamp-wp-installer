@@ -1,19 +1,31 @@
 #!/bin/csh -f 
-# setting environments
-set wp_dbname = "$1"
+
+### START environments ###
+### PLEASE check the following arguments for your MAMP ###
 set wp_dbuser = "root"
 set wp_dbpass = "root"
-
+set wp_login_user="admin"
+set wp_login_pass="admin"
 set WP = '/usr/local/bin/wp'
+### END environments ###
 
-set path = (/Applications/MAMP/bin/php/php5.6.31/bin $path)
+set wp_dbname = "$1"
+
+set php_path = `ls -d /Applications/MAMP/bin/php/php* | head -1`
+set path = (${php_path}/bin $path)
 
 if ( "$wp_dbname" == "" ) then
  echo "Please input database name."
  exit
 endif
 
-set wp_url = "http://localhost:8888/$wp_dbname"
+set mamp_status = "`ps -ef| grep /Applications/MAMP/Library/bin/mysqld_safe | grep -v 'grep' `"
+if ( "$mamp_status" == "" ) then
+  echo "Please run MAMP and start servers, first."
+  open -a MAMP
+  exit
+endif
+
 set wp_path = "/Applications/MAMP/htdocs/$wp_dbname"
 
 # Check for Update to WP CLI
@@ -33,18 +45,17 @@ $WP cli update --yes
 
 # Check requirement commands
 echo 'Remove the following site'
-echo $wp_path
+which php
+echo "WordPress Path: $wp_path"
+echo "WordPress User: $wp_login_user"
+echo "WordPress Pass: $wp_login_pass"
 echo "DB: $wp_dbname"
-echo $wp_url
 echo ''
 echo -n 'Are you ready? [yes/no]: '
 while(1)
   set check = $<
   if("$check" == "yes") then
      break
-  else
-     echo "Exit process."
-     exit
   endif
 end
 
