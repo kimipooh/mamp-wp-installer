@@ -62,7 +62,7 @@ If the WP-CLI command isn't installed, the tool tries to download the latest ver
 
 もし、/usr/local/bin/wp に WP-CLI をインストールしていない場合には、自動的に最新の WP-CLI をダウンロードし、インストールします。
 
-# Addtional functions （追加機能）
+# Additional functions （追加機能）
 
 ## Enable SSL (https) on MAMP for macOS only (macOS 専用 - MAMP で SSLを有効にする）
 
@@ -90,6 +90,42 @@ If you disable SSL on MAMP, please comment out httpd-ssl.conf (# Include /Applic
 https://kitaney-wordpress.blogspot.com/2017/10/mamp-ssl-macos-high-sierra.html
 で詳しく説明しているので、そちらを御覧ください。
 
+## How to use it with Virtual Host (Virtual Host を使うには)
+
+Unfortunately, Firefox displays the warning even if inter-CA is importing to the certification file. 
+Firstly, if you don't do mamp-enable-ssl.csh yet, do it.
+Then,
+
+残念ながら Firefox については自己証明書の場合、中間証明書をいれてもエラーが出てしまいます。<br />
+もし、mamp-enable-ssl.csh を実行（MAMPのSSL化）をしていないなら、それを先にしてください。
+あとは下記を参考にしてみてください。
+
+mamp-create-ssl-for-vhosts.csh  domain/subdomain.
+
+ex. 
+mamp-create-ssl-for-vhosts.csh  example.com
+
+SSLCertificateFile
+/Applications/MAMP/conf/apache/ssl/vhosts/example.com.crt
+SSLCertificateKeyFile
+/Applications/MAMP/conf/apache/ssl/vhosts/example.com.key
+
+Please add the following settings in /Applications/MAMP/conf/apache/httpd-ssl.conf
+
+1. Add the following value before <VirtualHost>.
+NameVirtualHost *:443
+
+2. Add the Virtual Host setting.
+
+<VirtualHost *:443>
+     DocumentRoot "/Applications/MAMP/htdocs/example.com"
+     ServerName example.com
+     SSLEngine on
+     SSLCertificateFile /Applications/MAMP/conf/apache/ssl/vhosts/example.com.crt
+     SSLCertificateKeyFile /Applications/MAMP/conf/apache/ssl/vhosts/example.com_nopass.key
+</VirtualHost>
+
+
 ## How to install a WordPress with SSL (https) on MAMP (MAMP で SSL対応の WordPress をインストールする方法）
 
 Basically, you can use "mamp-wp-install.csh" by changing "set wp_url" value (to https://localhost/$wp_dataname).
@@ -106,6 +142,7 @@ mamp-wp-install-with-ssl.csh  demo
 * 1.4 MAMP 4.2.1 and macOS High Sierra (10.13) supported. Added some enviroment.
 * 1.5 Added the tool for enabling SSL on MAMP (mamp-enable-ssl.csh)
 * 1.6 Added the function for automatically setting up the php path from MAMP. Arranged the environments which a user can customize.
+* 1.7 Added mamp-create-ssl-for-vhosts.csh tool for Virtual Host.
 
 # バージョン履歴
 
@@ -116,3 +153,4 @@ mamp-wp-install-with-ssl.csh  demo
 * 1.4 MAMP 4.2.1 に対応。macOS High Sierra (10.13) で動作確認。環境設定項目を追加。
 * 1.5 MAMPで SSLを利用できるようにするツールを追加（ mamp-enable-ssl.csh）。
 * 1.6 MAMPでアクティブな php バージョンを自動検出しパスに追加する機能を追加。またユーザーが変更可能な環境設定を整理して見やすくした。
+* 1.7 Virtual Host に対応したツール「mamp-create-ssl-for-vhosts.csh」の公開
