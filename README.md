@@ -143,6 +143,7 @@ mamp-wp-install-with-ssl.csh  demo
 * 1.5 Added the tool for enabling SSL on MAMP (mamp-enable-ssl.csh)
 * 1.6 Added the function for automatically setting up the php path from MAMP. Arranged the environments which a user can customize.
 * 1.7 Added mamp-create-ssl-for-vhosts.csh tool for Virtual Host.
+* 1.8 Change php path to latest version on MAMP.
 
 # バージョン履歴
 
@@ -154,3 +155,4 @@ mamp-wp-install-with-ssl.csh  demo
 * 1.5 MAMPで SSLを利用できるようにするツールを追加（ mamp-enable-ssl.csh）。
 * 1.6 MAMPでアクティブな php バージョンを自動検出しパスに追加する機能を追加。またユーザーが変更可能な環境設定を整理して見やすくした。
 * 1.7 Virtual Host に対応したツール「mamp-create-ssl-for-vhosts.csh」の公開
+* 1.8 php パスを一番古いバージョンから新しいバージョンへ変更（wpが php5.4 だとうまく動かなくなっていたので）

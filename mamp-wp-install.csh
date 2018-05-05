@@ -14,7 +14,7 @@ set wp_base_url = "http://localhost:8888"
 
 set wp_dbname = "$1"
 set lang = "$2"
-set php_path = `ls -d /Applications/MAMP/bin/php/php* | head -1`
+set php_path = `ls -d /Applications/MAMP/bin/php/php* | tail -1`
 set path = (${php_path}/bin $path)
 
 if ( "$wp_dbname" == "" ) then
