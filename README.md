@@ -5,8 +5,8 @@ This is the helpful shell script tools for installing or removing WordPress on M
 
 # How to install （インストール方法）
 
-git clone https://github.com/kimipooh/mamp-wp-installer
-cd mamp-wp-installer
+1. git clone https://github.com/kimipooh/mamp-wp-installer
+2. cd mamp-wp-installer
 
 Move to mamp-wp-install.csh and mamp-wp-delete.csh to a path directory, such as /usr/local/bin .
 
