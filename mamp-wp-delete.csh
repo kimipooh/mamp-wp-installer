@@ -12,7 +12,7 @@ set WP = '/usr/local/bin/wp'
 set wp_dbname = "$1"
 
 set php_path = `ls -d /Applications/MAMP/bin/php/php* | head -1`
-set path = (${php_path}/bin $path)
+set path = (${php_path}/bin /Applications/MAMP/Library/bin $path)
 
 if ( "$wp_dbname" == "" ) then
  echo "Please input database name."

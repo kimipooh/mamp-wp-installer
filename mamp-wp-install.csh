@@ -4,7 +4,7 @@
 ### PLEASE check the following arguments for your MAMP ###
 set wp_dbuser = "root"
 set wp_dbpass = "root"
-set wp_db_host = "localhost:8889"
+set wp_db_host = "127.0.0.1:8889"
 set wp_login_user="admin"
 set wp_login_pass="admin"
 set wp_login_email="sample@example.com"
@@ -15,7 +15,7 @@ set wp_base_url = "http://localhost:8888"
 set wp_dbname = "$1"
 set lang = "$2"
 set php_path = `ls -d /Applications/MAMP/bin/php/php* | tail -1`
-set path = (${php_path}/bin $path)
+set path = (${php_path}/bin /Applications/MAMP/Library/bin $path)
 
 if ( "$wp_dbname" == "" ) then
  echo "Please input database name."
