@@ -1,7 +1,8 @@
 # mamp-wp-installer
-This is the helpful shell script tools for installing or removing WordPress on MAMP by a command line for MacOS. If you want to use them, please install MAMP (https://www.mamp.info/en/),  first. I tested the tool on MacOS 10.12.6 and 10.13.
+This is the helpful shell script tools for installing or removing WordPress on MAMP by a command line for MacOS. If you want to use them, please install MAMP (https://www.mamp.info/en/),  first. I tested the tool on macOS 10.15. macOS 10.15 requires the additional rules regarding ExtendedKeyUsage (EKU) and the validity period less than 825 days. In detail, please see https://support.apple.com/en-us/HT210176 . Thus, I fixed mamp-enable-ssh.csh file.
+ 
 
-これは MacOS用のMAMPにおいて、コマンドから WordPress の初期インストールや削除を手助けするツールです。そのため、MAMPがインストールされていなければ動作しません。また MacOS 10.12.6/10.13で動作検証しています。
+これは MacOS用のMAMPにおいて、コマンドから WordPress の初期インストールや削除を手助けするツールです。そのため、MAMPがインストールされていなければ動作しません。また MacOS 10.15で動作検証しています。macOS 10.15 では、追加ルールとして「ExtendedKeyUsage (EKU)への対応」「証明書期日は 825日以下」にすることを求めています。詳細：https://support.apple.com/en-us/HT210176 。そのため、mamp-enable-ssl.csh の一部を書き換えました。
 
 # How to install （インストール方法）
 

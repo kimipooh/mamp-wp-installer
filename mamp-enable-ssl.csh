@@ -43,7 +43,7 @@ sed 's|server.key|ssl/server_nopass.key|g' $H_TEMP > ${H_TEMP}-2
 mv ${H_TEMP}-2 ${H_TEMP}
 sed 's|server.crt|ssl/server.crt|g' $H_TEMP > ${H_TEMP}-2  
 mv ${H_TEMP}-2 ${H_TEMP}
-sed 's|#SSLCACertificatePath "/Applications/MAMP/conf/apache/ssl/ssl.crt|ssl/SSLCACertificatePath "/Applications/MAMP/conf/apache/ssl/ssl.crt|g' $H_TEMP > ${H_TEMP}-2  
+sed 's|#SSLCACertificateFile "/Applications/MAMP/conf/apache/ssl.crt/ca-bundle.crt"|SSLCACertificateFile "/Applications/MAMP/conf/apache/ssl/ssl.crt"|g' $H_TEMP > ${H_TEMP}-2  
 mv ${H_TEMP}-2 ${H_TEMP}
 
 
@@ -81,7 +81,7 @@ new_certs_dir   = .
 certificate     = ssl.crt
 serial          = ./serial
 private_key     = ./private/ssl.key
-default_days    = 3650
+default_days    = 700
 default_crl_days= 30
 default_md      = sha256
 policy          = policy_anything
@@ -131,11 +131,13 @@ challengePassword_max		= 20
 unstructuredName		= An optional company name
 [ usr_cert ]
 basicConstraints=CA:FALSE
+extendedKeyUsage = serverAuth
 nsComment			= "OpenSSL Generated Certificate"
 subjectKeyIdentifier=hash
 authorityKeyIdentifier=keyid,issuer:always
 subjectAltName = @alt_names
 [ v3_req ]
+extendedKeyUsage = serverAuth
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
@@ -158,9 +160,10 @@ proxyCertInfo=critical,language:id-ppl-anyLanguage,pathlen:3,policy:foo
 EOF
 
 
-$OPENSSL req -config openssl.cnf -new -x509 -newkey rsa:2048 -out ssl.crt -keyout private/ssl.key -days 3650 
-
+#$OPENSSL req -config openssl.cnf -new -x509 -newkey rsa:2048 -out ssl.crt -keyout private/ssl.key -days 3650 
+$OPENSSL req -config openssl.cnf -new -x509 -newkey rsa:2048 -out ssl.crt -keyout private/ssl.key -days 700 -sha256
 $OPENSSL req -config openssl.cnf -new -keyout server.key -out server.csr -sha256
+
 $OPENSSL ca -config openssl.cnf  -out server.crt -infiles server.csr
 
 $OPENSSL rsa -in server.key -out server_nopass.key
