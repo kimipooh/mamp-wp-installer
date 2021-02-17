@@ -45,7 +45,8 @@ sed 's|server.crt|ssl/server.crt|g' $H_TEMP > ${H_TEMP}-2
 mv ${H_TEMP}-2 ${H_TEMP}
 sed 's|#SSLCACertificateFile "/Applications/MAMP/conf/apache/ssl.crt/ca-bundle.crt"|SSLCACertificateFile "/Applications/MAMP/conf/apache/ssl/ssl.crt"|g' $H_TEMP > ${H_TEMP}-2  
 mv ${H_TEMP}-2 ${H_TEMP}
-
+sed 's|SSLMutex  "file:/Applications/MAMP/Library/logs/ssl_mutex"|Mutex default|g' $H_TEMP > ${H_TEMP}-2
+mv ${H_TEMP}-2 ${H_TEMP}
 
 cat $H_TEMP  > $HTTPD_SSL_CONF
 rm -f $H_TEMP
@@ -81,7 +82,7 @@ new_certs_dir   = .
 certificate     = ssl.crt
 serial          = ./serial
 private_key     = ./private/ssl.key
-default_days    = 700
+default_days    = 365
 default_crl_days= 30
 default_md      = sha256
 policy          = policy_anything
@@ -161,7 +162,7 @@ EOF
 
 
 #$OPENSSL req -config openssl.cnf -new -x509 -newkey rsa:2048 -out ssl.crt -keyout private/ssl.key -days 3650 
-$OPENSSL req -config openssl.cnf -new -x509 -newkey rsa:2048 -out ssl.crt -keyout private/ssl.key -days 700 -sha256
+$OPENSSL req -config openssl.cnf -new -x509 -newkey rsa:2048 -out ssl.crt -keyout private/ssl.key -days 365 -sha256
 $OPENSSL req -config openssl.cnf -new -keyout server.key -out server.csr -sha256
 
 $OPENSSL ca -config openssl.cnf  -out server.crt -infiles server.csr
