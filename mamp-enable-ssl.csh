@@ -22,7 +22,7 @@ set HTTPD_SSL_CONF = /Applications/MAMP/conf/apache/httpd-ssl.conf
 cp -p $HTTPD_CONF  ${HTTPD_CONF}.org
 
 set H_TEMP = /tmp/$0:t.$$
-sed 's|#Include /Applications/MAMP/conf/apache/extra/httpd-ssl.conf|Include /Applications/MAMP/conf/apache/httpd-ssl.conf|g' $HTTPD_CONF > $H_TEMP
+sed 's|#Include /Applications/MAMP/conf/apache/extra/httpd-ssl.conf|Include /Applications/MAMP/conf/apache/httpd-ssl.conf|g' | sed 's|#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so|LoadModule socache_shmcb_module modules/mod_socache_shmcb.so|g' $HTTPD_CONF > $H_TEMP
 cat $H_TEMP > $HTTPD_CONF
 rm -f $H_TEMP
 
