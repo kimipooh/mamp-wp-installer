@@ -3,11 +3,14 @@
 # Before install brew install openssl on HomeBrew
 set openssl_brew = /usr/local/opt/openssl/bin/openssl
 set openssl_local = /usr/local/bin/openssl
+set openssl_mamp = /Applications/MAMP/Library/bin/openssl
 
 if ( -f $openssl_brew ) then
   set OPENSSL = $openssl_brew
 else if ( -f $openssl_local ) then
   set OPENSSL = $openssl_local
+else if ( -f $openssl_mamp ) then
+  set OPENSSL = $openssl_mamp
 else
  echo "Please install 'openssl' command using Homebrew or MacPots".
  exit
@@ -22,7 +25,11 @@ set HTTPD_SSL_CONF = /Applications/MAMP/conf/apache/httpd-ssl.conf
 cp -p $HTTPD_CONF  ${HTTPD_CONF}.org
 
 set H_TEMP = /tmp/$0:t.$$
-sed 's|#Include /Applications/MAMP/conf/apache/extra/httpd-ssl.conf|Include /Applications/MAMP/conf/apache/httpd-ssl.conf|g' $HTTPD_CONF| sed 's|#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so|LoadModule socache_shmcb_module modules/mod_socache_shmcb.so|g'  > $H_TEMP
+sed 's|#Include /Applications/MAMP/conf/apache/extra/httpd-ssl.conf|Include /Applications/MAMP/conf/apache/httpd-ssl.conf |g' $HTTPD_CONF | sed 's|#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so|LoadModule socache_shmcb_module modules/mod_socache_shmcb.so|g' | sed 's|#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so|LoadModule socache_shmcb_module modules/mod_socache_shmcb.so|g' | sed 's|#LoadModule rewrite_module modules/mod_rewrite.so|LoadModule rewrite_module modules/mod_rewrite.so |g'  > $H_TEMP
+
+
+
+
 cat $H_TEMP > $HTTPD_CONF
 rm -f $H_TEMP
 
@@ -47,6 +54,7 @@ sed 's|#SSLCACertificateFile "/Applications/MAMP/conf/apache/ssl.crt/ca-bundle.c
 mv ${H_TEMP}-2 ${H_TEMP}
 sed 's|SSLMutex  "file:/Applications/MAMP/Library/logs/ssl_mutex"|Mutex default|g' $H_TEMP > ${H_TEMP}-2
 mv ${H_TEMP}-2 ${H_TEMP}
+
 
 cat $H_TEMP  > $HTTPD_SSL_CONF
 rm -f $H_TEMP
